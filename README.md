@@ -73,6 +73,42 @@ La partie 1 du projet consiste à créer une page template et faire la validatio
   ![Capture d’écran 2024-05-02 231600](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/e3ddb128-90b7-4eaa-bec6-00cf372784f4)
 
 
+  ## Partie 3
+
+  La partie 3 du projet consiste à sécurité avec Spring security:
+
+1. InMemomy Authentication :
+  
+2. JDBC Authentication :
+ 
+3. UserDetails Service :
+
+   Préciser de créer notre propre façon de gérer les utilisateurs et les rôles de creer notre propre methode pour gerer les utilisateurs et roles :
+
+   a. Ajouter une nouvelle entité et repository pour l'utilisateur et le rôle :
+
+   ![Ajouter nouveau entiite et repo pour user et role ](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/108b2e6c-9219-4513-b9d0-c9c70cb66ce4)
+   
+   ![AppUser role](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/69d3a90d-c4d4-4a90-b0ab-220bba8ab1ed)
+
+   b. Gestion des rôles et des utilisateurs via notre service :
+
+   ![gere role et  utilisaeur avec notre service](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/1b8dbeea-f16a-4f82-8be0-95d93c53241f)
+
+   c. Notre propre UserDetailsService :
+   
+   ![UserDetailsService Auth](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/ad047a48-f2ca-4f92-8e44-e5a13ab525df)
+
+   d.  Ajouter nouveau service à httpSecurity:
+
+   ![Implemente  UserDetailsService Auth](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/428f0d21-d90f-40eb-98ba-bdca8f51f1e7)
+
+   e. Tester  avec CommandLineRunner : 
+
+   ![Tester les nouvaux fonction de notre service de sucirity](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/a18bfa60-f0ac-4072-baf4-d171a897e41a)
+
+
+
 
 
 
