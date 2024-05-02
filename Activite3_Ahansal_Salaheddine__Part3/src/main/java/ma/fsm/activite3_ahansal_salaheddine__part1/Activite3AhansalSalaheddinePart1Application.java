@@ -2,6 +2,7 @@ package ma.fsm.activite3_ahansal_salaheddine__part1;
 
 import ma.fsm.activite3_ahansal_salaheddine__part1.entities.Patient;
 import ma.fsm.activite3_ahansal_salaheddine__part1.repositories.PatientRepository;
+import ma.fsm.activite3_ahansal_salaheddine__part1.security.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -52,12 +53,8 @@ public class Activite3AhansalSalaheddinePart1Application implements  CommandLine
         patientRepository.save(new Patient(null,"Hanane",new Date(),false,4321));
         patientRepository.save(new Patient(null,"Imane",new Date(),true,134));*/
     }
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return args -> {
@@ -72,5 +69,26 @@ public class Activite3AhansalSalaheddinePart1Application implements  CommandLine
            if(u3==null)
                 jdbcUserDetailsManager.createUser(User.withUsername("user33").password(passwordEncoder.encode("password1")).roles("USER","ADMIN").build());
         };
+    }
+
+    // c'est déjà fait
+    // @Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
+        return args -> {
+
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+            accountService.addNewUser("salah","1234","salah@gmail.com","1234");
+            accountService.addNewUser("ahansal","1234","ahansal@gmail.com","1234");
+
+            accountService.addRoleToUser("salah","USER");
+            accountService.addRoleToUser("ahansal","USER");
+            accountService.addRoleToUser("ahansal","ADMIN");
+        };
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

@@ -1,6 +1,8 @@
 package ma.fsm.activite3_ahansal_salaheddine__part1.security;
 
 
+import lombok.AllArgsConstructor;
+import ma.fsm.activite3_ahansal_salaheddine__part1.security.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.Http2;
 import org.springframework.context.annotation.Bean;
@@ -20,12 +22,14 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    @Bean
+    private PasswordEncoder passwordEncoder;
+    private UserDetailServiceImpl userDetailServiceImpl;
+
+    //@Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
         return new JdbcUserDetailsManager(dataSource);
     }
@@ -44,13 +48,21 @@ public class SecurityConfig {
         httpSecurity.rememberMe();
         httpSecurity.authorizeHttpRequests().requestMatchers("/webjars/**", "/h2-console/**").permitAll();
 
+
+        // je peut utilisé annotations @EnableMethodSecurity(prePostEnabled = true)
+        // et en controller : @PreAuthorize("hasRole('ROLE_ADMIN')")
         /*
-        // je peut utilisé annotations @EnableMethodSecurity(prePostEnabled = true) et en controller : @PreAuthorize("hasRole('ROLE_ADMIN')")
         httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
         httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");*/
 
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
+
+        //Une fois que l'utilisateur saisit le nom d'utilisateur et le mot de passe,
+        // il est nécessaire d'appeler cette Implementation userDetailServiceImpl
+        httpSecurity.userDetailsService(userDetailServiceImpl);
+
+
         return httpSecurity.build();
     }
 }
