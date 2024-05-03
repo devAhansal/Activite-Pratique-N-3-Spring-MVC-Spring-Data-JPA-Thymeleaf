@@ -25,7 +25,7 @@ La partie 1 du projet consiste à créer une application Web JEE basée sur Spri
 
    ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/23a102ee-e7a8-4d1d-aee8-bac342a44c12)
    
-5. Ajouter de nouvelles dépendances mySql et webjar pour le bootstrap et bootstrap-icone:
+5. Ajouter de nouvelles dépendances mySql et webjar et bootstrap et bootstrap-icone:
 
 ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/174a82e1-2af4-46ff-b507-985bcfb47ab1)
 
@@ -78,9 +78,66 @@ La partie 1 du projet consiste à créer une page template et faire la validatio
   La partie 3 du projet consiste à sécurité avec Spring security:
 
 1. InMemomy Authentication :
+   a. Ajouter de nouvelle dépendance Spring Security :
+
+   ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/f688a1f1-988f-4691-b4b8-89ed70b501a7)
+
+   b. Creér une classe de configuration :
+
+   ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/069b161a-e431-4f5d-a747-a947c4bc55bf)
+
+   c. Ajouter l'intrface SecurityFilterChain configurer une chaîne de filtres de sécurité
+
+   ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/12350092-cc8e-4a2e-bfda-d924146e07a8)
+
+   ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/f06e5d35-e6e9-4cd1-9806-dc4021e61d1c)
+
+   d. Les serveurs génèrent des jetons CSRF pour protéger les formulaires contre les attaques :
   
+   ![Capture d’écran 2024-05-03 180022](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/51c1bd86-fcf5-4406-ad31-264c848dc52b)
+
+   e. Crée un gestionnaire d'utilisateurs en mémoire pour l'authentification dans une application Spring Security :
+       
+       @Bean
+       public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
+           return new InMemoryUserDetailsManager(
+                   User.withUsername("user1").password(passwordEncoder.encode("1234")).roles("USER").build(),
+                   User.withUsername("Admin1").password(passwordEncoder.encode("1234")).roles("USER","ADMIN").build()
+           );
+       }
+
+    f. Intégrer Thymeleaf avec Spring Security : 
+
+    ![image](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/145de8c2-fc5e-453a-b668-77a51791772f)
+
+    ![Capture d’écran 2024-05-03 184626](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/8bff7f97-20b0-4b8e-8d7d-d48161df90a0)
+
+    j. Préciser de créer notre propre login :
+    
+    ![Capture d’écran 2024-05-03 184753](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/0c01741e-0059-4316-98ff-47e012141dc3)
+
+    ![Capture d’écran 2024-05-03 184719](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/fe23e333-fcdd-4f50-b0d1-18370b5a89de)
+
+    ![Capture d’écran 2024-05-03 184822](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/bf400968-efa1-4f67-b2e1-575ca1ad00cc)
+    
 2. JDBC Authentication :
- 
+
+   a. Ajouter la dépendance JDBC:
+
+   ![Ajouter  Jdbc](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/0423ae8f-6897-4530-a5fe-f898abee46bb)
+
+   b. Créer la table des utilisateurs :
+
+   ![Create table user](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/28a5465a-7f92-4207-ad4f-6edcb21f6df8)
+
+   c. Configurer la source de données et l'authentification JDBC 
+
+   ![addconfig](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/a6dc5615-e411-46cd-9c01-d22f9bf0076e)
+
+   d. Ajouter des utilisateurs à la base de données avec CommandeLine :
+
+   ![Ajouter user avec commande line](https://github.com/S-AHANSAL/Activite-Pratique-N-3-Spring-MVC-Spring-Data-JPA-Thymeleaf/assets/81721069/5d554d50-99f3-4b0f-9413-4761e6571731)
+
 3. UserDetails Service :
 
    Préciser de créer notre propre façon de gérer les utilisateurs et les rôles de creer notre propre methode pour gerer les utilisateurs et roles :
