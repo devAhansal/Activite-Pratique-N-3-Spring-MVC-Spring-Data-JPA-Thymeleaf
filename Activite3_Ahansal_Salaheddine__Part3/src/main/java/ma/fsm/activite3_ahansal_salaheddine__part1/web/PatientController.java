@@ -71,6 +71,7 @@ public class PatientController {
         model.addAttribute("patient", new Patient());
         return "formPatients";
     }
+
     @PostMapping("/admin/save")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
@@ -81,6 +82,7 @@ public class PatientController {
         patientRepository.save(patient);
         return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
+
     @GetMapping("/admin/editPatient")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String editPatient(@RequestParam(name = "id") Long id, Model model,String keyword, int page){
